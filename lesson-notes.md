@@ -1,6 +1,43 @@
 # Lesson Notes
 
-## Current task: Contact section
+## Current task: fix the Contact section (review feedback)
+
+You did well: the links work, the text is right, and you committed it.
+Two bugs to fix:
+
+### Bug 1: the Contact section is in the wrong place
+
+Your Contact `<section>` is **inside** the Services `<section>`.
+It should be **next to** it (a sibling), both inside `<main>`:
+
+```
+main
+├── p        (tagline)
+├── section  (Services)
+└── section  (Contact)
+```
+
+**Hint:** look at where the Services section's closing `</section>` is.
+Which `</section>` belongs to which `<section>`?
+Press `Shift + Alt + F` afterwards; the indentation will show if it's right.
+
+### Bug 2: the email link goes to the wrong address
+
+The visitor *sees* one email address, but the link *sends to* a different one.
+Compare the `href` with the visible text on the email line carefully.
+
+**Lesson:** the `href` and the visible text are separate. The browser doesn't check
+that they match, so you must.
+
+### Test
+
+1. Save, refresh, click the email link. Check the "To:" address in the email app.
+2. Commit: `git commit -am "Fix contact section nesting and email link"`
+   (`-a` = automatically add changed files, so you can skip `git add .` for files Git already tracks)
+
+---
+
+## Previous task: Contact section
 
 ### New concept: links
 
