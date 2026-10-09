@@ -1,6 +1,81 @@
 # Lesson Notes
 
-## Current task: a "Book Now" button
+## Current task: put your project on GitHub
+
+### Why
+
+So far your commits live **only on your computer**. If your laptop dies, they're gone.
+**GitHub** is a website that stores a copy of your Git project online.
+
+- **Backup**: your code is safe.
+- **Portfolio**: employers and clients can see your work.
+- Later, we can use it to put the site **live on the internet** (GitHub Pages).
+
+### New terms
+
+| Term | Meaning |
+|---|---|
+| **Repository (repo)** | A project tracked by Git. Your folder is a *local* repo. |
+| **Remote** | A copy of your repo stored somewhere else (on GitHub). |
+| **origin** | The usual nickname for your main remote. |
+| **Push** | Upload your commits to the remote. |
+| **Branch** | A line of commits. Yours is called `master`; GitHub's default name is `main`. |
+
+### Part 1: create the repo on GitHub (in your browser)
+
+1. Log in at github.com (create a free account if you don't have one).
+2. Click the **+** at the top-right, then **New repository**.
+3. Repository name: `henna-landing-page`
+4. Choose **Public** (so it can be part of your portfolio).
+5. **Do NOT tick** "Add a README", ".gitignore" or "license".
+   Your repo must start empty, because you already have commits to upload.
+6. Click **Create repository**.
+
+GitHub then shows a page with setup commands. **Copy the URL** that ends in `.git`
+(it looks like `https://github.com/YOUR-USERNAME/henna-landing-page.git`).
+
+### Part 2: connect and push (in the VS Code terminal)
+
+Run these one at a time:
+
+```
+git branch -M main
+```
+Renames your branch from `master` to `main`, to match GitHub's default.
+
+```
+git remote add origin PASTE-YOUR-URL-HERE
+```
+Tells Git: "my remote copy, nicknamed `origin`, lives at this URL."
+
+```
+git push -u origin main
+```
+Uploads your commits. `-u` remembers this, so next time you only type `git push`.
+
+**The first push may open a browser window asking you to sign in to GitHub.**
+That's normal. Sign in and allow access.
+
+### Test
+
+Refresh your repo page on GitHub. You should see `index.html`, `style.css`,
+`script.js` and `lesson-notes.md`, and your commit count.
+
+### Your new workflow from now on
+
+```
+git add .
+git commit -m "message"
+git push
+```
+
+If you get an error, **copy the full error text** and paste it to Claude.
+
+---
+
+## Done: "Book Now" button ✅
+
+## Previous task: a "Book Now" button
 
 Every business landing page needs one clear **call to action** (a button
 telling the visitor what to do next). Ours: **Book Now**.
