@@ -1,39 +1,153 @@
 # Lesson Notes
 
-## Current task: fix the Contact section (review feedback)
+## Current task: a "Book Now" button
 
-You did well: the links work, the text is right, and you committed it.
-Two bugs to fix:
+Every business landing page needs one clear **call to action** (a button
+telling the visitor what to do next). Ours: **Book Now**.
 
-### Bug 1: the Contact section is in the wrong place
+### Step 0: commit your styling first
 
-Your Contact `<section>` is **inside** the Services `<section>`.
-It should be **next to** it (a sibling), both inside `<main>`:
+You haven't committed the `body` styling yet. Do that before starting:
 
 ```
-main
-├── p        (tagline)
-├── section  (Services)
-└── section  (Contact)
+git add .
+git commit -m "Add body styling"
 ```
 
-**Hint:** look at where the Services section's closing `</section>` is.
-Which `</section>` belongs to which `<section>`?
-Press `Shift + Alt + F` afterwards; the indentation will show if it's right.
+### New concept: classes
 
-### Bug 2: the email link goes to the wrong address
+So far your CSS selectors target **every** element of a type (`h1`, `body`).
+But we want to style **one specific link** as a button, not all links.
 
-The visitor *sees* one email address, but the link *sends to* a different one.
-Compare the `href` with the visible text on the email line carefully.
+A **class** is a label you put on an element in HTML:
 
-**Lesson:** the `href` and the visible text are separate. The browser doesn't check
-that they match, so you must.
+```html
+<a href="#contact" class="button">Book Now</a>
+```
+
+Then in CSS, you target that label with a **dot**:
+
+```css
+.button {
+  /* styles here */
+}
+```
+
+- `class="button"` in HTML = "this element has the label *button*"
+- `.button` in CSS = "style everything with the label *button*"
+- You choose the class name. Pick names that describe the purpose.
+
+### New concept: jump links
+
+`href="#contact"` means "jump to the element on **this page** with `id="contact"`".
+An `id` is like a class, but must be **unique**: only one element per page can have it.
+
+### Your task (HTML part): `index.html`
+
+1. Give your Contact `<section>` the attribute `id="contact"`.
+2. Inside `<main>`, right **below the tagline**, add a `<p>` containing a link:
+   - visible text: **Book Now**
+   - `href="#contact"`
+   - `class="button"`
+
+**Test:** save, refresh, click **Book Now**. The page should jump to Contact.
+(If the window is tall enough to show everything, you might not see a jump.
+Make the window shorter to test.)
+
+### Your task (CSS part): `style.css`
+
+Add a new rule with the selector `.button` and these declarations:
+
+| Property | Value | What it does |
+|---|---|---|
+| `display` | `inline-block` | Lets the link have padding like a box |
+| `background-color` | `#8b4513` | Henna brown |
+| `color` | `white` | Text colour |
+| `padding` | `12px 24px` | Space *inside*: 12px top/bottom, 24px left/right |
+| `border-radius` | `6px` | Rounded corners |
+| `text-decoration` | `none` | Removes the underline |
+
+`padding` vs `margin`: **padding** = space inside the box (between text and edge),
+**margin** = space outside the box (between it and other things).
 
 ### Test
 
-1. Save, refresh, click the email link. Check the "To:" address in the email app.
-2. Commit: `git commit -am "Fix contact section nesting and email link"`
-   (`-a` = automatically add changed files, so you can skip `git add .` for files Git already tracks)
+1. Save and refresh. **Book Now** should look like a brown, rounded button.
+2. Click it. It should still jump to Contact.
+3. Commit with your own message.
+
+---
+
+## Done: first real styling (CSS) ✅
+
+## Previous task: first real styling (CSS)
+
+Your HTML structure is done for now. Time to make it look better.
+
+### Warm-up: tidy your HTML
+
+Lines 22–24 and 25–32 of `index.html` have uneven indentation.
+Press `Shift + Alt + F` in `index.html` to fix it.
+
+### New concepts
+
+**1. Styling `body` styles the whole page.**
+Many CSS properties are **inherited**: if you set a font on `body`,
+everything inside `body` (headings, paragraphs, lists) uses it too.
+
+**2. Five new properties:**
+
+| Property | What it does | Example value |
+|---|---|---|
+| `font-family` | Which font to use | `Georgia, serif` |
+| `background-color` | Colour behind the content | `#fdf6ec` |
+| `color` | Text colour | `#3b2a20` |
+| `max-width` | The widest an element may get | `700px` |
+| `margin` | Space *outside* an element | `0 auto` |
+
+**3. Font lists.** `Georgia, serif` means: "use Georgia; if the computer
+doesn't have it, use any serif font." The last one is a safe backup.
+
+**4. Hex colours.** `#fdf6ec` is a colour written as a code (red, green, blue
+mixed together). VS Code shows a small colour square next to it.
+Hover over the square to get a colour picker.
+
+**5. Centering trick.** `max-width: 700px;` plus `margin: 0 auto;`
+means "no wider than 700px, and split the leftover space equally
+left and right," which centers it. `auto` lets the browser calculate the margin.
+
+### Your task
+
+In `style.css`, **below** your existing `h1` rule, add a new rule
+with the selector `body` and these five declarations:
+
+- font-family: `Georgia, serif`
+- background-color: `#fdf6ec` (a warm cream)
+- color: `#3b2a20` (a dark brown)
+- max-width: `700px`
+- margin: `0 auto`
+
+**Hints:**
+- Same pattern as your `h1` rule: `selector { property: value; }`
+- Each declaration goes on its own line and **ends with `;`**
+- Missing `;` is the #1 CSS bug. If one line doesn't work, check the line *above* it.
+
+### Test
+
+1. Save and refresh.
+2. You should see: a cream background, a new font, brown text,
+   and all the content in a centered column. Try making the browser window
+   wider and narrower and watch the column.
+3. Commit with your own message.
+
+---
+
+## Done: fix Contact section ✅
+
+Both bugs fixed: the sections are now siblings, and the email `href` matches the visible text.
+
+**Lesson:** the `href` and the visible text are separate. The browser doesn't check
+that they match, so you must.
 
 ---
 
@@ -94,6 +208,7 @@ Then tell Claude it's done.
 | Headings | `h1` (one per page) → `h2` (sections) → `h3` (items) |
 | Lists | `<ul>` holds `<li>` items (bullets) |
 | HTML entity | Code for a special character: `&copy;` = ©, `&amp;` = & (always ends with `;`) |
+| Link | `<a href="...">text</a>`; `mailto:` = email, `tel:` = phone |
 | Git commit | A saved snapshot: `git add .` then `git commit -m "message"` |
 
 ## Debugging habits
