@@ -1,6 +1,75 @@
 # Lesson Notes
 
-## Current task: upgrade Services with descriptions and sample prices
+## Current task: style the services as cards
+
+### Why
+
+A **card** is a box with a background, padding and rounded corners that groups
+related content. Cards make sections easier to scan. You've seen them on almost
+every website.
+
+You already know most of what you need: `background-color`, `padding`,
+`border-radius`, `margin`. This task combines them, plus one new property.
+
+### New concept: `border`
+
+`border` draws a line around a box. It takes 3 values in one line:
+
+```css
+border: 1px solid #e6d3bf;
+```
+
+- `1px` = thickness
+- `solid` = style (others: `dashed`, `dotted`)
+- `#e6d3bf` = colour (a soft tan)
+
+Setting several things in one property like this is called a **shorthand**.
+
+### New concept: the box model
+
+Every element is a box made of 4 layers, from inside out:
+
+```
+margin   (space outside the border, pushes other boxes away)
+border   (the line)
+padding  (space inside the border, around the content)
+content  (the text)
+```
+
+### Your task (in `style.css`)
+
+**Rule 1:** selector `.service` (remember the dot!)
+
+| Property | Value | What it does |
+|---|---|---|
+| `background-color` | `white` | Card stands out from the cream page |
+| `border` | `1px solid #e6d3bf` | Soft tan outline |
+| `border-radius` | `8px` | Rounded corners |
+| `padding` | `16px` | Space inside the card |
+| `margin-bottom` | `16px` | Gap below each card, so they don't touch |
+
+**Rule 2:** selector `.price`
+
+| Property | Value | What it does |
+|---|---|---|
+| `color` | `#8b4513` | Henna brown, same as your button |
+| `font-weight` | `bold` | Makes the price stand out |
+
+### Test
+
+1. Save and refresh. Each service should be a white rounded box with a thin outline,
+   with a gap between them, and bold brown prices.
+2. **Experiment:** change `padding` to `40px` and refresh. What changes?
+   Then change it back. Experimenting like this is how you learn CSS.
+3. Use DevTools: right-click a card → **Inspect**. In the Styles panel, scroll down
+   to see a coloured diagram of the box model (margin, border, padding, content).
+4. Add, commit, push.
+
+---
+
+## Done: Services descriptions and sample prices ✅
+
+## Previous task: upgrade Services with descriptions and sample prices
 
 ### Why
 
