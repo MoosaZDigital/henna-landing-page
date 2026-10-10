@@ -1,6 +1,77 @@
 # Lesson Notes
 
-## Current task: put your project on GitHub
+## Current task: upgrade Services with descriptions and sample prices
+
+### Why
+
+Right now Services is just three bullet points. Visitors want to know
+**what each service is** and **roughly what it costs** before contacting you.
+In this task you'll give each service its own small block of content.
+(Next task we'll style these blocks as "cards" with CSS.)
+
+### New concept: `<div>`
+
+A `<div>` is a **generic box** with no meaning of its own. Use it when you need
+to group things together (usually to style them) and no semantic tag fits.
+
+Compare:
+- `<section>` = "this is a themed part of the page" (has meaning)
+- `<div>` = "just a box to group these" (no meaning)
+
+### New concept: heading levels in practice
+
+Your page title is `h1`, section titles are `h2`.
+Each service *inside* the Services section gets an `h3`.
+Never skip levels (don't jump from `h2` to `h4`). Screen readers use the levels
+like a table of contents.
+
+### Your task (in `index.html`)
+
+1. **Delete** the whole `<ul>...</ul>` list in Services (keep the `<h2>`).
+2. Below the `<h2>`, add **three** `<div>` elements, each with `class="service"`.
+3. Inside each `div`, put:
+   - an `<h3>` with the service name
+   - a `<p>` with a one-sentence description
+   - a `<p>` with the price, plus `class="price"`
+
+Use this sample content:
+
+| Service | Description | Price |
+|---|---|---|
+| Bridal Henna | Detailed hands and feet designs for your wedding day. | From $150 (sample price) |
+| Party & Event Henna | Quick designs for guests at birthdays, Eid and other celebrations. | From $80/hour (sample price) |
+| Simple Hand Designs | Small, elegant designs for one hand or both. | From $20 (sample price) |
+
+**Hints:**
+- Here's the shape of **one** service block. Repeat it 3 times:
+  ```
+  div (class="service")
+  ├── h3
+  ├── p
+  └── p (class="price")
+  ```
+- Remember: `&` must be written as `&amp;`
+- Write `class="..."` on the **opening** tag, like you did for the button.
+- `Shift + Alt + F` when done.
+
+### Test
+
+1. Save and refresh. You should see three service names in a slightly
+   smaller heading size than "Services", each with a description and price.
+2. Commit and push:
+   ```
+   git add .
+   git commit -m "Add service descriptions and sample prices"
+   git push
+   ```
+
+---
+
+## Done: project on GitHub ✅
+
+Repo: https://github.com/MoosaZDigital/henna-landing-page
+
+## Previous task: put your project on GitHub
 
 ### Why
 
