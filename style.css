@@ -52,11 +52,10 @@ img {
   object-fit: cover;
 }
 
-header{
+header {
   background-color: #f3e3d0;
   text-align: center;
   padding: 48px 16px;
   border-radius: 8px;
-
-
+  margin-top: 16px;
 }
