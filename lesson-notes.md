@@ -1,6 +1,76 @@
 # Lesson Notes
 
-## Current task: show the gallery photos side by side (flexbox)
+## Current task: a hero banner
+
+### Why
+
+The **hero** is the big banner at the top of a landing page. It's the first
+thing visitors see, so in 3 seconds it must answer: **who is this, what do they
+offer, and what should I do?** Your page already has all three pieces
+(title, tagline, Book Now button). They just need to be grouped and made bold.
+
+### Step 1: the HTML (in `index.html`)
+
+Right now the title is in `<header>`, but the tagline and button are in `<main>`.
+**Move** the tagline `<p>` and the Book Now `<p>` **into the `<header>`**,
+below the `<h1>`. (Cut with `Ctrl + X`, paste with `Ctrl + V`, so you don't
+retype anything.)
+
+```
+header
+├── h1
+├── p (tagline)
+└── p (Book Now button)
+```
+
+`<header>` is the right place: it's for the introduction to the page.
+
+Then press `Shift + Alt + F`. Your `<header>` is on one line right now; this
+spreads it out so the nesting is easy to see.
+
+### New concept: `text-align`
+
+`text-align: center` centers the **text and inline things** (like your button)
+inside a box. Compare with `margin: 0 auto`, which centers **the box itself**.
+
+### New concept: `font-size`
+
+Sets how big text is. `48px` is big, good for a hero title.
+
+### Step 2: the CSS (in `style.css`)
+
+**Rule 1:** a new rule with selector `header`
+
+| Property | Value | What it does |
+|---|---|---|
+| `background-color` | `#f3e3d0` | Light tan banner, darker than the cream page |
+| `text-align` | `center` | Centers the title, tagline and button |
+| `padding` | `48px 16px` | Lots of space above/below, a little at the sides |
+| `border-radius` | `8px` | Rounded corners, matching your cards and photos |
+| `margin-top` | `16px` | A gap above, so the banner doesn't touch the top of the window |
+
+**Rule 2:** in your **existing** `h1` rule, add:
+
+| Property | Value | What it does |
+|---|---|---|
+| `font-size` | `48px` | A big, bold title |
+
+### Test
+
+1. Save and refresh. You should see a tan banner at the top with a big
+   centered title, the tagline, and the Book Now button.
+2. Click **Book Now**. It should still jump to Contact.
+3. **Experiment:** change `padding` to `100px 16px`. How does the banner feel?
+   Pick the value you like best.
+4. Make the window narrow. Is the 48px title too big on a phone-sized window?
+   Remember what you see; we'll fix that later with a new tool.
+5. Add, commit, push.
+
+---
+
+## Done: flexbox gallery ✅
+
+## Previous task: show the gallery photos side by side (flexbox)
 
 ### Why
 

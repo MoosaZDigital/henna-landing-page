@@ -1,5 +1,6 @@
 h1 {
   color: brown;
+  font-size: 48px;
 }
 
 body {
@@ -49,4 +50,13 @@ img {
   width: 200px;
   height: 200px;
   object-fit: cover;
+}
+
+header{
+  background-color: #f3e3d0;
+  text-align: center;
+  padding: 48px 16px;
+  border-radius: 8px;
+
+
 }
