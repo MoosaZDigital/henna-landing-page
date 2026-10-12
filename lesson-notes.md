@@ -1,6 +1,48 @@
 # Lesson Notes
 
-## Current task: a hero banner
+## Current task: put the site live (GitHub Pages)
+
+### Why
+
+Until now, the site only opens on your computer. **GitHub Pages** takes the
+files in your GitHub repo and serves them as a real website, for free.
+Every `git push` updates the live site automatically (after a minute or two).
+
+### New terms
+
+| Term | Meaning |
+|---|---|
+| **Hosting** | A computer that's always online and sends your files to visitors |
+| **Deploy** | Putting a version of your site live |
+| **URL** | A web address, e.g. `https://moosazdigital.github.io/henna-landing-page/` |
+
+### Steps (in your browser, on github.com)
+
+1. Open your repo: https://github.com/MoosaZDigital/henna-landing-page
+2. Click **Settings** (top menu of the repo, with the gear icon).
+3. In the left sidebar, click **Pages**.
+4. Under **Build and deployment** → **Source**, choose **Deploy from a branch**.
+5. Under **Branch**, choose **main** and folder **/ (root)**, then click **Save**.
+6. Wait 1–2 minutes, then refresh the Settings → Pages screen. A box appears
+   at the top: **"Your site is live at ..."** with your link.
+
+**Why `index.html` matters:** when someone visits your link, the host
+automatically looks for a file called `index.html`. That's why the home page
+is always named that.
+
+### Test
+
+1. Open your live link. You should see your site, with the photos.
+2. Open it on your **real phone**.
+3. If the photos are missing online but work on your computer, check the
+   **uppercase/lowercase** in the file names. Your computer (Windows) ignores
+   case, but web servers don't: `Henna-1.jpg` ≠ `henna-1.jpg`.
+
+---
+
+## Done: hero banner + side padding for phones ✅
+
+## Previous task: a hero banner
 
 ### Why
 
