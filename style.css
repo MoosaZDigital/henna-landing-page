@@ -19,23 +19,21 @@ body {
   text-decoration: none;
 }
 
-.service{
-    background-color: white;
-    border: 1px solid #e6d3bf;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px
-
-
+.service {
+  background-color: white;
+  border: 1px solid #e6d3bf;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
 }
 
-.price{
-   color: #8b4513;
-    font-weight: bold;
+.price {
+  color: #8b4513;
+  font-weight: bold;
 }
 
-img{
+img {
   max-width: 100%;
-  height:auto;
+  height: auto;
   border-radius: 8px;
 }
