@@ -1,6 +1,93 @@
 # Lesson Notes
 
-## Current task: add a Gallery section with images
+## Current task: show the gallery photos side by side (flexbox)
+
+### Why
+
+Right now the 3 photos are stacked one under the other, so visitors have to
+scroll a lot. On a wide screen they should sit **in a row**. On a phone they
+should **stack**. This is called a **responsive layout**.
+
+### New concept: flexbox
+
+`display: flex` on a box turns its **children** into a row:
+
+```
+Before (normal):      After (display: flex):
+┌──────────┐          ┌──────┐ ┌──────┐ ┌──────┐
+│  photo 1 │          │  1   │ │  2   │ │  3   │
+└──────────┘          └──────┘ └──────┘ └──────┘
+┌──────────┐
+│  photo 2 │
+└──────────┘
+   ...
+```
+
+- The box with `display: flex` is the **flex container** (the parent).
+- The elements directly inside it are the **flex items** (the children).
+- Flexbox only affects the **direct children**, so we need a box around
+  just the 3 photos (not the `h2` and `p`).
+
+### New concept: descendant selector
+
+```css
+.gallery img { }
+```
+
+A **space** between two selectors means "inside". This targets only `<img>`
+elements **inside** something with `class="gallery"`. Other images on the page
+(you'll add some later) aren't affected.
+
+### Step 1: the HTML (in `index.html`)
+
+Wrap your 3 `<img>` elements in a `<div class="gallery">`. The `h2` and `p`
+stay outside the div.
+
+```
+section
+├── h2
+├── p
+└── div (class="gallery")
+    ├── img
+    ├── img
+    └── img
+```
+
+### Step 2: the CSS (in `style.css`)
+
+**Rule 1:** selector `.gallery`
+
+| Property | Value | What it does |
+|---|---|---|
+| `display` | `flex` | Puts the children in a row |
+| `flex-wrap` | `wrap` | If they don't fit, move to the next line (phones!) |
+| `gap` | `16px` | Space between the photos |
+| `justify-content` | `center` | Centers the photos in the row |
+
+**Rule 2:** selector `.gallery img`
+
+| Property | Value | What it does |
+|---|---|---|
+| `width` | `200px` | Every photo the same width |
+| `height` | `200px` | Every photo the same height (squares) |
+| `object-fit` | `cover` | Fill the square **without squishing**; trims the edges instead |
+
+Your photos have different shapes (some tall, some wide). `object-fit: cover`
+makes them all neat squares without stretching them.
+
+### Test
+
+1. Save and refresh. The 3 photos should be squares in a row, with gaps.
+2. **Experiment:** remove `object-fit: cover`, refresh. What happens to the
+   photos? Put it back.
+3. Make the browser window narrow. The photos should wrap onto new lines.
+4. Add, commit, push.
+
+---
+
+## Done: Gallery section with images ✅
+
+## Previous task: add a Gallery section with images
 
 ### Why
 
