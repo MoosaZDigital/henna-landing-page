@@ -1,6 +1,85 @@
 # Lesson Notes
 
-## Current task: style the services as cards
+## Current task: add a Gallery section with images
+
+### Why
+
+Henna is visual art. Photos are the most convincing part of a henna website.
+
+### New concept: `<img>`
+
+```html
+<img src="images/bridal-henna.jpg" alt="Bridal henna design on both hands" />
+```
+
+- `<img>` has **no closing tag** (like `<meta>` and `<link>`).
+- `src` ("source") = the path to the image file. Same idea as `href` in `<link>`.
+- `alt` ("alternative text") = a description of the image.
+
+### Why `alt` matters
+
+- **Screen readers** read the `alt` text aloud to blind visitors (**accessibility**).
+- If the image fails to load, the `alt` text shows instead.
+- **Google** reads it to understand your images (**SEO**).
+
+Good `alt` text describes **what's in the picture**, as if you're explaining it on the phone:
+- ❌ `alt="image1"` or `alt="henna"`
+- ✅ `alt="Floral henna design covering the back of a hand"`
+
+### Step 1: get 3 sample photos
+
+1. Create a folder called `images` in your project (next to `index.html`).
+2. Go to **pexels.com** or **unsplash.com** and search "henna".
+   Photos there are free to use, which matters: you can't use random images
+   from Google because they belong to someone else.
+3. Download **3** photos (pick the "small" or "medium" size, so the page loads fast).
+4. Move them into your `images` folder and **rename** them simply, e.g.:
+   - `henna-1.jpg`
+   - `henna-2.jpg`
+   - `henna-3.jpg`
+
+   **Naming rules:** all lowercase, no spaces (use `-` instead).
+   Spaces in file names cause broken paths.
+
+### Step 2: the HTML (in `index.html`)
+
+Between the Services and Contact sections, add a new `<section>` with:
+1. An `<h2>`: **Gallery**
+2. A `<p>`: **Sample photos for demonstration. Not the artist's own work.**
+   (Honest labelling, like your sample prices.)
+3. Three `<img>` elements, each with a `src` pointing to one of your images and
+   a descriptive `alt` (look at each photo and describe it).
+
+### Step 3: the CSS (in `style.css`)
+
+Your images are probably **huge** and spill off the page. Fix it with a rule
+using the selector `img` (no dot, because it targets every `<img>`, like `h1` and `body`):
+
+| Property | Value | What it does |
+|---|---|---|
+| `max-width` | `100%` | Never wider than its container (your 700px column) |
+| `height` | `auto` | Keep the right proportions, so it isn't squished |
+| `border-radius` | `8px` | Rounded corners, matching your cards |
+
+This is your first bit of **responsive design**: the image shrinks to fit any screen.
+
+### Test
+
+1. Save and refresh. You should see 3 photos, none wider than the page column.
+2. **Break it on purpose:** change one `src` to a wrong file name. What shows up
+   instead of the photo? (That's the `alt` text.) Then fix it back.
+3. Make the browser window narrow. The images should shrink with it.
+4. Add, commit, push.
+
+**If an image doesn't show:** 99% of the time the `src` path doesn't match the
+real file name. Check the spelling, uppercase/lowercase, and the extension
+(`.jpg` vs `.jpeg` vs `.png`).
+
+---
+
+## Done: services as cards ✅
+
+## Previous task: style the services as cards
 
 ### Why
 

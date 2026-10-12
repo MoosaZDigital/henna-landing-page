@@ -27,10 +27,15 @@ body {
     margin-bottom: 16px
 
 
-
 }
 
 .price{
    color: #8b4513;
     font-weight: bold;
+}
+
+img{
+  max-width: 100%;
+  height:auto;
+  border-radius: 8px;
 }
