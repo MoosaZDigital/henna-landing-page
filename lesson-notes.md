@@ -1,6 +1,119 @@
 # Lesson Notes
 
-## Current task: a smaller title on phones (media query)
+## Current task: a contact form
+
+### Why
+
+Right now visitors must open their email app or phone to contact you. A form
+lets them send a booking request **right on the page**. Later, this form becomes
+your **lead capture** (collecting potential clients' details).
+
+For now the form is a **demo**: it won't send anything yet. Sending needs
+JavaScript or a service, which comes later. So we label it honestly.
+
+### New concepts
+
+| Tag / attribute | What it does |
+|---|---|
+| `<form>` | The box that holds all the fields and the button |
+| `<label>` | The visible name of a field ("Name", "Email") |
+| `<input>` | A one-line field. **No closing tag** (like `<img>`) |
+| `<textarea>` | A multi-line field, for the message. **Has** a closing tag |
+| `<button>` | A real button. `type="submit"` means "send the form" |
+| `type="email"` | The browser checks that it looks like an email (has an `@`) |
+| `required` | The browser won't submit the form if this field is empty |
+| `name="..."` | The name the data is sent under |
+| `for` + `id` | Connect a label to its field. They must match **exactly** |
+
+**Link vs button:** a **link** (`<a>`) takes you somewhere. A **button** does
+something (send, open, close). Your "Book Now" goes somewhere, so it's
+correctly a link. "Send" does something, so it's a `<button>`.
+
+### One field, fully written
+
+```html
+<label for="name">Name</label>
+<input type="text" id="name" name="name" required />
+```
+
+`for="name"` points at `id="name"`. Clicking the label then puts the cursor in
+the field, and screen readers read "Name" when the field is selected (**accessibility**).
+
+### Step 1: the HTML (in `index.html`)
+
+In the Contact section, **below** the phone number, add:
+
+1. A `<p>`: **Demo form: messages are not sent yet.**
+2. A `<form>` containing:
+   - Label **Name** + an `input` with `type="text"`, `id="name"`, `name="name"`, `required`
+   - Label **Email** + an `input` with `type="email"`, `id="email"`, `name="email"`, `required`
+   - Label **Message** + a `<textarea>` with `id="message"`, `name="message"`, `rows="5"`, `required`
+     (`rows` = how many lines tall it starts)
+   - A `<button>` with `type="submit"` and `class="button"`, text: **Send message**
+
+```
+form
+├── label + input     (Name)
+├── label + input     (Email)
+├── label + textarea  (Message)
+└── button
+```
+
+**Test the HTML** (it will look messy, that's fine, we style it in Step 2):
+1. Click the word **Name**. Does the cursor jump into the Name field?
+2. Click **Send message** with everything empty. What does the browser say?
+3. Type `abc` in Email and try to send. What happens?
+4. Fill in everything correctly and send. The page reloads. **Look at the URL
+   in the address bar.** What do you see after the `?`? Where do those words come from?
+
+### Step 2: the CSS (in `style.css`)
+
+**New concept: several selectors at once.** A comma means "and":
+`input, textarea { }` styles both inputs and textareas.
+
+Add these rules **above** your media query (it should stay at the bottom):
+
+**Rule 1:** `label`
+
+| Property | Value | What it does |
+|---|---|---|
+| `display` | `block` | Label on its own line, above its field |
+| `margin-bottom` | `4px` | Small gap between label and field |
+| `font-weight` | `bold` | Easier to scan |
+
+**Rule 2:** `input, textarea`
+
+| Property | Value | What it does |
+|---|---|---|
+| `display` | `block` | Each field on its own line |
+| `width` | `100%` | Full width of the column |
+| `box-sizing` | `border-box` | Makes `width: 100%` **include** padding and border, so the field doesn't stick out |
+| `padding` | `8px` | Space inside the field |
+| `border` | `1px solid #e6d3bf` | Same soft tan as your cards |
+| `border-radius` | `6px` | Rounded, like your button |
+| `font-family` | `inherit` | Use the page's font (fields don't do this by default!) |
+| `margin-bottom` | `16px` | Gap before the next label |
+
+**Rule 3:** add to your existing `.button` rule (so the `<button>` looks like your Book Now link)
+
+| Property | Value | What it does |
+|---|---|---|
+| `border` | `none` | Removes the browser's default grey button border |
+| `font-family` | `inherit` | Same font as the page |
+| `cursor` | `pointer` | The hand cursor on hover, so it feels clickable |
+
+**Test the CSS**
+1. Labels sit above their fields, fields are full width, and the button looks like Book Now.
+2. **Experiment:** remove `box-sizing: border-box` and refresh. Look at the right
+   edge of the fields. What happened? Put it back.
+3. Check phone view.
+4. Add, commit, push, `git status`.
+
+---
+
+## Done: media query ✅
+
+## Previous task: a smaller title on phones (media query)
 
 ### Why
 
