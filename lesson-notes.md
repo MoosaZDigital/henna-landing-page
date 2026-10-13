@@ -1,6 +1,79 @@
 # Lesson Notes
 
-## Current task: put the site live (GitHub Pages)
+## Current task: a smaller title on phones (media query)
+
+### Why
+
+Your 48px title looks great on a computer, but on a phone it's huge and may
+break onto two lines. We want **different styles for different screen sizes**.
+
+### New concept: media query
+
+A **media query** is a CSS rule with a condition: "**only if** the screen is
+this size, use these styles."
+
+```css
+@media (max-width: 600px) {
+  h1 {
+    font-size: 32px;
+  }
+}
+```
+
+**In plain words:** "If the screen is 600px wide or less, make the `h1` 32px."
+
+- `@media` = "here comes a condition"
+- `(max-width: 600px)` = the condition: screen width is **at most** 600px
+  (phones are usually 360–430px wide; computers are 1000px+)
+- Inside the `{ }` you write **normal CSS rules**, so there are **two** levels of `{ }`.
+  Count them carefully: every `{` needs its `}`.
+
+### New concept: order matters (the cascade)
+
+If two rules give the same element different values, and they're equally
+specific, **the one lower in the file wins**. Your media query must therefore
+come **after** your normal `h1` rule, so put it at the **very bottom** of
+`style.css`. (CSS = **Cascading** Style Sheets. "Cascading" is this idea.)
+
+### Your task (in `style.css`)
+
+At the **bottom** of the file, add a media query for `max-width: 600px` with:
+
+**Rule 1:** `h1`
+
+| Property | Value | What it does |
+|---|---|---|
+| `font-size` | `32px` | Smaller title on phones |
+
+**Rule 2:** `header`
+
+| Property | Value | What it does |
+|---|---|---|
+| `padding` | `32px 16px` | A shorter banner, so phone visitors see more content right away |
+
+Both rules go **inside the same** `@media { }` block.
+
+### Test
+
+1. Save and refresh on a normal window. **Nothing should change** (the screen
+   is wider than 600px, so the condition is false).
+2. Open phone view (`F12`, then `Ctrl + Shift + M`). The title should be smaller.
+3. **Watch it switch:** in phone view, drag the width handle on the right
+   edge of the page slowly, from narrow to wide. Watch the width number at the top.
+   At **600px** the title jumps between sizes. That's your media query
+   turning on and off.
+4. **Break it on purpose:** move the media query to the **top** of `style.css`.
+   Does it still work in phone view? Why not? Move it back.
+5. Add, commit, push, then `git status`. Check your **live site** on your phone
+   1–2 minutes later.
+
+---
+
+## Done: site is live ✅
+
+Live link: https://moosazdigital.github.io/henna-landing-page/
+
+## Previous task: put the site live (GitHub Pages)
 
 ### Why
 
