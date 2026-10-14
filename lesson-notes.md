@@ -1,6 +1,57 @@
 # Lesson Notes
 
-## Current task: a contact form
+## Current task: keep a file private with `.gitignore`
+
+### Why
+
+`linkedin-posts.md` holds your draft posts. Your repo is public, so if Git
+tracks it, anyone can read your drafts on GitHub (and on your live site).
+Later, you'll use the same tool to keep **API keys and passwords** out of
+GitHub, which really matters: bots scan GitHub for leaked keys within minutes.
+
+### New concept: `.gitignore`
+
+A plain text file named **exactly** `.gitignore` (starts with a dot, no
+extension) in your project's main folder. Each line is a file or folder
+name Git should pretend doesn't exist.
+
+```
+linkedin-posts.md
+```
+
+**Important:** `.gitignore` only works on files Git isn't tracking **yet**.
+If a file was already committed, adding it to `.gitignore` doesn't remove it.
+That's why we do this **before** ever committing the drafts.
+
+### Steps
+
+1. **Before:** run `git status`. You should see `linkedin-posts.md` under
+   "Untracked files" (Git sees it, but isn't tracking it yet).
+2. In VS Code, create a new file in the **main project folder** (next to
+   `index.html`) named `.gitignore`.
+3. Write one line in it: `linkedin-posts.md`, and save.
+4. **After:** run `git status` again. What changed? Which file appears now,
+   and which one disappeared?
+5. Commit and push the `.gitignore` itself (it's safe to make public, and
+   it should be shared):
+   ```
+   git add .
+   git commit -m "Add .gitignore for private drafts"
+   git push
+   git status
+   ```
+
+### ⚠️ The trade-off
+
+An ignored file is **not backed up** on GitHub. If your laptop dies, the
+drafts are gone. Keep a copy somewhere else (OneDrive, Google Drive, email
+it to yourself), or move the drafts into a LinkedIn draft or a notes app.
+
+---
+
+## Done: contact form ✅
+
+## Previous task: a contact form
 
 ### Why
 
