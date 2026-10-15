@@ -1,6 +1,136 @@
 # Lesson Notes
 
-## Current task: your first JavaScript (Gate 2 begins)
+## Current task: handle a click (FAQ show/hide)
+
+### Why
+
+Clicking things is how visitors interact with a page. In this lesson: click a
+question → its answer appears. Click again → it hides.
+
+**Division of jobs:**
+- **HTML:** the question and answer exist
+- **CSS:** a class `.hidden` that hides things
+- **JavaScript:** decides **when** to add or remove that class
+
+### Step 1: the HTML (in `index.html`)
+
+Add a new `<section>` **between Gallery and Contact** with:
+
+1. An `<h2>`: **FAQ**
+2. A `<p>`: **Sample questions and answers for demonstration.**
+3. A `<button>` with `id="faq-button"` and `class="faq-question"`, text:
+   **How long does henna last?**
+4. A `<p>` with `id="faq-answer"` and **two** classes, `faq-answer` and `hidden`, text:
+   **Usually 1 to 3 weeks, depending on your skin and aftercare.**
+
+**New concept: several classes on one element.** Separate them with a space:
+
+```html
+<p id="faq-answer" class="faq-answer hidden">...</p>
+```
+
+This element has two labels: `faq-answer` (what it is) and `hidden`
+(its current state). JavaScript will add and remove `hidden`.
+
+### Step 2: the CSS (in `style.css`, above the media query)
+
+**Rule 1:** `.hidden`
+
+| Property | Value | What it does |
+|---|---|---|
+| `display` | `none` | Removes the element from the page completely |
+
+**Rule 2:** `.faq-question` (make the button look like a heading, not a grey box)
+
+| Property | Value |
+|---|---|
+| `background` | `none` |
+| `border` | `none` |
+| `padding` | `0` |
+| `font-family` | `inherit` |
+| `font-size` | `18px` |
+| `font-weight` | `bold` |
+| `color` | `#8b4513` |
+| `cursor` | `pointer` |
+
+**Test:** the question shows, the answer doesn't (it has `hidden`).
+Clicking does nothing yet. That's Step 3.
+
+### New concept: functions
+
+A **function** is a named set of steps. You **define** it once, then **run**
+(call) it whenever you need it.
+
+```js
+function toggleAnswer() {
+  faqAnswer.classList.toggle("hidden");
+}
+```
+
+- `function` = "I'm defining a function"
+- `toggleAnswer` = its name (camelCase, describes what it does: start with a verb)
+- `()` = where inputs would go (none for now)
+- `{ }` = the steps inside it
+- Defining it does **not** run it. It just waits until it's called.
+
+### New concept: `classList.toggle`
+
+`element.classList.toggle("hidden")` = "if the element has the class
+`hidden`, remove it; if it doesn't, add it." Like a light switch.
+
+### New concept: event listeners
+
+```js
+faqButton.addEventListener("click", toggleAnswer);
+```
+
+In plain words: "**When** `faqButton` is **clicked**, **run** `toggleAnswer`."
+
+- `"click"` is the **event** (other events: `"submit"`, `"input"`, `"mouseover"`)
+- `toggleAnswer` **without** `()` = "here's the function, run it later, on each click"
+- `toggleAnswer()` **with** `()` = "run it **now**", which is not what we want
+
+### Step 3: the JavaScript (in `script.js`, below the year code)
+
+```js
+const faqButton = document.querySelector("#faq-button");
+const faqAnswer = document.querySelector("#faq-answer");
+
+function toggleAnswer() {
+  faqAnswer.classList.toggle("hidden");
+}
+
+faqButton.addEventListener("click", toggleAnswer);
+```
+
+1. Find the button. 2. Find the answer. 3. Define what a click should do.
+4. Connect the click to the function.
+
+**Data in** (a click) → **something happens** (toggle the class) →
+**screen updates** (the answer appears or disappears).
+
+### Test
+
+1. Click the question: the answer appears. Click again: it hides.
+2. **Watch it happen:** open DevTools → **Elements** tab, find the answer `<p>`.
+   Click the question several times and watch the `class` attribute change.
+3. **Break it on purpose:** add `()` after `toggleAnswer` in the
+   `addEventListener` line. Refresh. Is the answer visible at the start?
+   Does clicking work? Can you explain why? Then remove the `()`.
+4. Add, commit, push, `git status`.
+
+### Good to know
+
+HTML has a built-in element that does this **without** JavaScript:
+`<details>` + `<summary>`. On a real project, the simplest tool that works
+is often the best choice. We're building it by hand here to learn events,
+which you'll need for everything else (forms, menus, API calls).
+
+---
+
+## Done: first JavaScript (automatic year) ✅
+
+## Previous task: your first JavaScript (Gate 2 begins)
 
 ### Why
 
