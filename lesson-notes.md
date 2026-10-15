@@ -1,6 +1,110 @@
 # Lesson Notes
 
-## Current task: keep a file private with `.gitignore`
+## Current task: your first JavaScript (Gate 2 begins)
+
+### Why
+
+HTML = structure, CSS = looks, **JavaScript = behaviour**. JavaScript can
+**change the page after it has loaded**: react to clicks, update text, fetch data.
+
+The mental model for all of Gate 2: **data in → something happens → screen updates.**
+
+Your first goal: the footer year updates by itself. In January 2027 your
+footer should say 2027 without you touching it.
+
+### Step 1: connect `script.js` (in `index.html`)
+
+Just **before** `</body>`, add:
+
+```html
+<script src="script.js"></script>
+```
+
+- Like `<link>` connects CSS, `<script src>` connects JavaScript.
+- `<script>` **does** need a closing tag, even though it's empty.
+- **Why at the bottom?** The browser reads HTML from top to bottom. JavaScript
+  that wants to change the footer must run **after** the footer exists.
+
+### Step 2: say hello (in `script.js`)
+
+```js
+console.log("Hello from script.js!");
+```
+
+- `console.log(...)` prints a message to the browser's **Console**, a hidden
+  panel for developers. Visitors never see it.
+- Text in JavaScript goes inside quotes. Lines end with `;`.
+
+**Test:** save, refresh, press `F12`, click the **Console** tab.
+Do you see your message? If yes, your file is connected.
+
+### New concept: variables and types
+
+A **variable** is a labelled box that holds a value.
+
+```js
+const studioName = "Henna Studio";
+const startingPrice = 20;
+console.log(studioName);
+console.log(typeof startingPrice);
+```
+
+- `const` = "create a box that won't be replaced" (use it by default).
+  `let` = a box whose value **can** change later.
+- `studioName` = the label. Style: **camelCase** (first word lowercase,
+  next words start with a capital). No spaces, no dashes.
+- `=` means "put this value in the box", **not** "equals".
+- `typeof` tells you what **type** a value is:
+
+| Value | Type |
+|---|---|
+| `"Henna Studio"` | `string` (text, always in quotes) |
+| `20` | `number` (no quotes!) |
+| `true` / `false` | `boolean` (yes/no) |
+
+**Step 3 task:** in `script.js`, create the two variables above, log both,
+and log the `typeof` of each. Then predict: what's `typeof "20"`? Check it.
+
+### Step 4: the automatic year
+
+**HTML:** in the footer, wrap the year in a `<span>` with an id:
+
+```html
+<p>&copy; <span id="year">2026</span> Henna Studio. ...</p>
+```
+
+`<span>` is like `<div>`, but for a few words **inside** a line of text.
+
+**JavaScript:**
+
+```js
+const currentYear = new Date().getFullYear();
+const yearElement = document.querySelector("#year");
+yearElement.textContent = currentYear;
+```
+
+Line by line:
+1. `new Date()` = "right now"; `.getFullYear()` = "just the year". Store it.
+2. `document.querySelector("#year")` = find the element with `id="year"`.
+   It uses **CSS selectors**! `#` means id, like `.` means class.
+3. `.textContent = ...` = replace the text inside that element.
+
+**Data in** (today's date) → **something happens** (get the year) →
+**screen updates** (the footer).
+
+**Test:**
+1. Change `2026` in the HTML to `1999`, save, refresh. The footer still says
+   the current year. Why?
+2. **Break it on purpose:** change `"#year"` to `"#yeer"`. Refresh, open the
+   Console. Read the red error: what does it say, and which **file and line**
+   does it point at? Then fix it back.
+3. Add, commit, push, `git status`.
+
+---
+
+## Done: `.gitignore` ✅
+
+## Previous task: keep a file private with `.gitignore`
 
 ### Why
 
