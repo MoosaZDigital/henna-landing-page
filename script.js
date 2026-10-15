@@ -1,11 +1,3 @@
-console.log("Hello from script.js!");
-const studioName = "Henna Studio";
-const startingPrice = 20;
-console.log(studioName);
-console.log(typeof startingPrice);
-console.log(startingPrice);
-console.log(typeof studioName);
-console.log(typeof 20);
 const currentYear = new Date().getFullYear();
 const yearElement = document.querySelector("#year");
 yearElement.textContent = currentYear;
