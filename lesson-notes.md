@@ -1,6 +1,103 @@
 # Lesson Notes
 
-## Current task: handle a click (FAQ show/hide)
+## Current task: arrays and objects (data for the FAQ)
+
+### Why
+
+Right now your FAQ question and answer are typed into the HTML. Next lesson,
+JavaScript will **build** the FAQ from a list of data. First you need to know
+how JavaScript stores lists and grouped information.
+
+This is also exactly what data from an **API** looks like (Gate 2's goal),
+so learning to read it now pays off later.
+
+### New concept: arrays (lists)
+
+```js
+const services = ["Bridal Henna", "Party Henna", "Simple Designs"];
+```
+
+- Square brackets `[ ]`, items separated by commas.
+- Each item has a **position number**, called an **index**.
+  **Counting starts at 0**, not 1!
+
+| Index | Value |
+|---|---|
+| `0` | `"Bridal Henna"` |
+| `1` | `"Party Henna"` |
+| `2` | `"Simple Designs"` |
+
+- `services[0]` → `"Bridal Henna"`
+- `services.length` → `3` (how many items)
+
+### New concept: objects (grouped info)
+
+```js
+const faq = {
+  question: "How long does henna last?",
+  answer: "Usually 1 to 3 weeks, depending on your skin and aftercare.",
+};
+```
+
+- Curly braces `{ }`, made of **key: value** pairs, separated by commas.
+- The **key** is a label (`question`), the **value** is the data.
+- Read a value with a dot: `faq.question`
+
+**Array vs object:** an array is a numbered **list** of things. An object is
+**one thing** described with labelled details.
+
+### New concept: an array of objects
+
+Put them together: a **list** where each item is **one FAQ**:
+
+```js
+const faqs = [
+  {
+    question: "How long does henna last?",
+    answer: "Usually 1 to 3 weeks, depending on your skin and aftercare.",
+  },
+  {
+    question: "How long does a bridal design take?",
+    answer: "Usually 3 to 6 hours, depending on how detailed the design is.",
+  },
+  {
+    question: "Do you travel to events?",
+    answer: "Yes, within Edmonton and surrounding areas.",
+  },
+];
+```
+
+**Reading it with your finger:** `faqs[1].answer`
+1. `faqs` → the whole list
+2. `[1]` → the **second** item (counting from 0!), the bridal question object
+3. `.answer` → that object's answer → `"Usually 3 to 6 hours, ..."`
+
+### Your task (in `script.js`)
+
+1. At the **bottom** of `script.js`, add the `faqs` array above (you can copy it).
+2. Below it, **predict first, then** log each of these and check:
+
+| Code | Your prediction | Actual result |
+|---|---|---|
+| `console.log(faqs.length);` | | |
+| `console.log(faqs[0].question);` | | |
+| `console.log(faqs[2].answer);` | | |
+| `console.log(faqs[1]);` | | |
+| `console.log(faqs[3]);` | | |
+
+3. **Challenge:** write a line that logs the **question** of the **last** FAQ.
+4. **Challenge 2:** add a **fourth** FAQ object to the array (your own sample
+   question and answer). Watch out for the commas between objects!
+   What does `faqs.length` show now?
+
+**Test:** no red errors in the Console. Commit when done (keep the logs
+for now, we'll clean up next lesson).
+
+---
+
+## Done: FAQ click show/hide ✅
+
+## Previous task: handle a click (FAQ show/hide)
 
 ### Why
 
