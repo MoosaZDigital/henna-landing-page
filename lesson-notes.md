@@ -1381,6 +1381,18 @@ Then tell Claude it's done.
 | HTML entity | Code for a special character: `&copy;` = ©, `&amp;` = & (always ends with `;`) |
 | Link | `<a href="...">text</a>`; `mailto:` = email, `tel:` = phone |
 | Git commit | A saved snapshot: `git add .` then `git commit -m "message"` |
+| Array of objects | A list of items, each with named parts: `{ question: "...", answer: "..." }` |
+| `for...of` loop | Runs the same code once for each item in an array |
+| `createElement` | JavaScript makes a new HTML element, e.g. `document.createElement("button")` |
+| `append` | Puts created elements onto the page, inside a chosen box |
+| Page source vs Elements | Page source = the file you wrote; Elements (Inspect) = what the browser built |
+| `git commit --amend` | Fix the last commit message, **only before pushing** |
+
+## Why build the FAQ from an array?
+
+- To add a question, I only add one object to the array. No HTML changes.
+- The loop writes the button and answer code once, not once per question.
+- All FAQ content lives in one place, so it's easy to edit.
 
 ## Debugging habits
 
