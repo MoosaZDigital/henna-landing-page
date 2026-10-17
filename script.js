@@ -2,14 +2,6 @@ const currentYear = new Date().getFullYear();
 const yearElement = document.querySelector("#year");
 yearElement.textContent = currentYear;
 
-const faqButton = document.querySelector("#faq-button");
-const faqAnswer = document.querySelector("#faq-answer");
-function toggleAnswer() {
-  faqAnswer.classList.toggle("hidden");
-}
-faqButton.addEventListener("click", toggleAnswer);
-const services = ["Bridal Henna", "Party Henna", "Simple Designs"];
-
 const faqs = [
   {
     question: "How long does henna last?",
@@ -27,12 +19,26 @@ const faqs = [
     question: "How do I book an appointment?",
     answer: "You can book an appointment by contacting us by email or phone.",
   },
+  {
+    question: "How long does henna take to dry?",
+    answer:
+      "Henna typically takes 20–30 minutes to dry to the touch, although the exact time depends on the design and how much paste is applied.",
+  },
 ];
+const faqList = document.querySelector("#faq-list");
 
-console.log(faqs.length);
-console.log(faqs[0].question);
-console.log(faqs[2].answer);
-console.log(faqs[1]);
-console.log(faqs[3]);
-console.log(faqs[2].question);
-console.log(faqs[3]);
+for (const faq of faqs) {
+  const button = document.createElement("button");
+  button.textContent = faq.question;
+  button.classList.add("faq-question");
+
+  const answer = document.createElement("p");
+  answer.textContent = faq.answer;
+  answer.classList.add("faq-answer", "hidden");
+
+  button.addEventListener("click", function () {
+    answer.classList.toggle("hidden");
+  });
+
+  faqList.append(button, answer);
+}

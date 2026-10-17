@@ -1,6 +1,116 @@
 # Lesson Notes
 
-## Current task: arrays and objects (data for the FAQ)
+## Current task: loop over the FAQ list and build it on the page
+
+### Why
+
+Your FAQ data lives in the `faqs` array, but the page still shows one
+hand-typed question. Now a **loop** will go through the array and **create**
+the HTML for every FAQ. Add an FAQ to the array → it appears on the page.
+**Data in → something happens → screen updates.**
+
+This is how almost every real app works: data (often from an API) is turned
+into HTML by JavaScript.
+
+### New concept: `for...of` loop
+
+```js
+for (const faq of faqs) {
+  console.log(faq.question);
+}
+```
+
+In plain words: "**For each** item **of** the `faqs` list, call it `faq`,
+and run the steps inside `{ }`." It runs once per item: 4 FAQs → 4 times.
+Each time, `faq` is the **next** object in the list.
+
+### New concept: creating elements with JavaScript
+
+| Code | What it does |
+|---|---|
+| `document.createElement("button")` | Creates a new `<button>` (not on the page yet!) |
+| `element.textContent = "..."` | Sets the text inside it |
+| `element.classList.add("a", "b")` | Adds classes (like writing `class="a b"`) |
+| `parent.append(child)` | Puts the element **inside** `parent`, so it appears on the page |
+
+**Why `textContent` and not `innerHTML`?** `textContent` always treats data as
+plain text. That's safer: if the data ever came from a visitor or an API, it
+can't sneak HTML or scripts into your page.
+
+### New concept: anonymous function
+
+```js
+button.addEventListener("click", function () {
+  answer.classList.toggle("hidden");
+});
+```
+
+A function with **no name**, written right where it's needed. Each button
+gets its own little function, which remembers **its own** answer.
+
+### Step 1: HTML (in `index.html`)
+
+In the FAQ section, **delete** the hand-typed `<button>` and answer `<p>`.
+Keep the `<h2>` and the "Sample questions..." `<p>`. In their place, add an
+empty box for JavaScript to fill:
+
+```html
+<div id="faq-list"></div>
+```
+
+### Step 2: JavaScript (in `script.js`)
+
+**Delete:** the old FAQ code (`faqButton`, `faqAnswer`, `toggleAnswer`, and
+its `addEventListener` line), the `services` array, and all the `console.log`
+lines. **Keep:** the year code and the `faqs` array.
+
+Then, **below** the `faqs` array, add:
+
+```js
+const faqList = document.querySelector("#faq-list");
+
+for (const faq of faqs) {
+  const button = document.createElement("button");
+  button.textContent = faq.question;
+  button.classList.add("faq-question");
+
+  const answer = document.createElement("p");
+  answer.textContent = faq.answer;
+  answer.classList.add("faq-answer", "hidden");
+
+  button.addEventListener("click", function () {
+    answer.classList.toggle("hidden");
+  });
+
+  faqList.append(button, answer);
+}
+```
+
+**Why below the array?** Top to bottom: the loop can't use `faqs` before it exists.
+
+### Step 3: Test, and spot the layout problem
+
+1. Refresh. Do all 4 questions appear? Do they sit **on one line**? Why?
+   (Hint: buttons are **inline** elements, like links. And the answers between
+   them are `display: none`, so nothing separates them.)
+2. **Fix it** in your `.faq-question` CSS rule, add:
+
+| Property | Value | What it does |
+|---|---|---|
+| `display` | `block` | Each question on its own line |
+| `margin-top` | `12px` | Space between questions |
+
+3. Click each question: each opens **its own** answer.
+4. **Add a 5th FAQ** to the array. Refresh. It appears with no HTML changes!
+5. **Where's the HTML?** Press `Ctrl + U` (view page source). Are the questions
+   there? Now look in DevTools → **Elements**. Are they there? Why the difference?
+6. Add, commit, push, `git status`.
+
+---
+
+## Done: arrays and objects ✅
+
+## Previous task: arrays and objects (data for the FAQ)
 
 ### Why
 
