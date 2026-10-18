@@ -1,6 +1,89 @@
 # Lesson Notes
 
-## Current task: loop over the FAQ list and build it on the page
+## Current task: FAQ accordion (functions)
+
+### Why
+
+Right now every answer opens on its own, so many can be open at once.
+In an **accordion**, opening one answer closes the others. To do that, we
+need a reusable piece of code: a **function** we name ourselves.
+
+### New concept: defining and calling a function
+
+```js
+function sayHello() {
+  console.log("Hello!");
+}
+
+sayHello(); // runs it
+```
+
+- `function sayHello() { ... }` **defines** it: saves the instructions, doesn't run them.
+- `sayHello();` **calls** it: actually runs it.
+
+### New concept: `querySelectorAll`
+
+`querySelector` finds **one** element. `querySelectorAll` finds **all** matching
+elements, and you can loop over them like an array:
+
+```js
+const allAnswers = document.querySelectorAll(".faq-answer");
+```
+
+### Your task
+
+In `script.js`, **above** your `for` loop:
+
+1. Write a function called `closeAllAnswers`.
+2. Inside it, use `querySelectorAll` to get every `.faq-answer`.
+3. Loop over them with `for...of` and add the class `"hidden"` to each one.
+
+Then, inside your click handler, **call** `closeAllAnswers()` **before** the
+`toggle` line.
+
+Hint: look at how your existing loop adds a class: `answer.classList.add(...)`.
+
+### Test
+
+1. Save, refresh. Click a question, then a **different** question.
+   The first one should close.
+2. Now **click an open question to close it.** Something goes wrong.
+   Don't fix it yet: tell Claude what happened and why you think it happened.
+   That bug is part 2 of this lesson.
+
+### Part 2: the bug, and the fix
+
+**The bug:** clicking an open question didn't close it.
+`closeAllAnswers()` closed it, then `toggle("hidden")` saw it was hidden and
+**opened it again**, too fast to see.
+
+**The fix:** remember whether it was closed **before** closing everything.
+
+```js
+button.addEventListener("click", function () {
+  const wasHidden = answer.classList.contains("hidden");
+
+  closeAllAnswers();
+
+  if (wasHidden) {
+    answer.classList.remove("hidden");
+  }
+});
+```
+
+- `classList.contains("hidden")` gives `true` (closed) or `false` (open).
+- `if (wasHidden) { ... }` runs the code inside **only if** it's `true`.
+- Was closed → everything closes, then this one opens.
+  Was open → everything closes, nothing reopens.
+
+**Lesson:** the **order** of lines matters. Check a value *before* the code
+that changes it.
+
+---
+
+## Done: loop over the FAQ list ✅
+
+## Previous task: loop over the FAQ list and build it on the page
 
 ### Why
 
@@ -1387,6 +1470,11 @@ Then tell Claude it's done.
 | `append` | Puts created elements onto the page, inside a chosen box |
 | Page source vs Elements | Page source = the file you wrote; Elements (Inspect) = what the browser built |
 | `git commit --amend` | Fix the last commit message, **only before pushing** |
+| Function | Named, reusable code: **define** with `function name() { }`, **call** with `name();` |
+| `querySelectorAll` | Finds **all** matching elements (a list you can loop over) |
+| `classList.contains` | Checks if an element has a class: `true` or `false` |
+| `if` statement | Runs code only when a condition is `true` |
+| Undo / redo | `Ctrl + Z` undoes, `Ctrl + Y` brings it back |
 
 ## Why build the FAQ from an array?
 

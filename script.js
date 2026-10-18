@@ -26,6 +26,12 @@ const faqs = [
   },
 ];
 const faqList = document.querySelector("#faq-list");
+function closeAllAnswers() {
+  const allAnswers = document.querySelectorAll(".faq-answer");
+  for (const answer of allAnswers) {
+    answer.classList.add("hidden");
+  }
+}
 
 for (const faq of faqs) {
   const button = document.createElement("button");
@@ -35,9 +41,14 @@ for (const faq of faqs) {
   const answer = document.createElement("p");
   answer.textContent = faq.answer;
   answer.classList.add("faq-answer", "hidden");
-
   button.addEventListener("click", function () {
-    answer.classList.toggle("hidden");
+    const wasHidden = answer.classList.contains("hidden");
+
+    closeAllAnswers();
+
+    if (wasHidden) {
+      answer.classList.remove("hidden");
+    }
   });
 
   faqList.append(button, answer);
