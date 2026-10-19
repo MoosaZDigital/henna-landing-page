@@ -53,3 +53,15 @@ for (const faq of faqs) {
 
   faqList.append(button, answer);
 }
+
+async function getWeather() {
+  const response = await fetch(
+    "https://api.open-meteo.com/v1/forecast?latitude=53.55&longitude=-113.49&current=temperature_2m",
+  );
+  const data = await response.json();
+  const temperature = data.current.temperature_2m;
+  const weatherElement = document.querySelector("#weather");
+  weatherElement.textContent = `Edmonton right now: ${temperature}°C`;
+}
+
+getWeather();

@@ -1,6 +1,131 @@
 # Lesson Notes
 
-## Current task: FAQ accordion (functions)
+## Current task: get live data from an API (`fetch`), part 1
+
+### Why
+
+So far all your data (the FAQs) is typed into your own code. Real apps get
+data from **somewhere else**: weather, maps, bookings, AI answers. They ask
+another computer for it over the internet. This is the **Gate 2 proof task**.
+
+We'll show **today's temperature in Edmonton** on the page, which is useful
+info for outdoor henna events.
+
+### New words
+
+| Word | Meaning |
+|---|---|
+| **API** | A website made for **code**, not people. You ask with a URL, it answers with data. |
+| **JSON** | The format of that data. It looks just like your JavaScript objects: `{ "temperature_2m": 8.4 }` |
+| **`fetch`** | The JavaScript command that sends the request to a URL |
+| **`await`** | "Wait here until the answer arrives" (the internet takes time) |
+| **`async`** | Must be written before `function` when the function uses `await` |
+
+### Try the API in your browser first
+
+Paste this URL into a new browser tab:
+
+```
+https://api.open-meteo.com/v1/forecast?latitude=53.55&longitude=-113.49&current=temperature_2m
+```
+
+You'll see JSON. Find `"current"` and, inside it, `"temperature_2m"`.
+That number is the temperature in Edmonton right now.
+
+- Everything after `?` is the **question** you're asking:
+  `latitude` and `longitude` = Edmonton, `current=temperature_2m` = "the
+  current temperature, please."
+- Same `name=value&name=value` pattern as your form data in the URL!
+
+### Your task
+
+At the **bottom** of `script.js`, add:
+
+```js
+async function getWeather() {
+  const response = await fetch(
+    "https://api.open-meteo.com/v1/forecast?latitude=53.55&longitude=-113.49&current=temperature_2m"
+  );
+  const data = await response.json();
+  console.log(data);
+}
+
+getWeather();
+```
+
+Line by line:
+
+1. `async function getWeather()` defines a function that will **wait** for things.
+2. `await fetch(...)` sends the request and waits for the reply (`response`).
+3. `await response.json()` reads the reply and turns the JSON into a JavaScript object (`data`).
+4. `console.log(data)` shows it in the Console so we can look inside.
+5. `getWeather();` **calls** the function. Without it, nothing happens.
+
+### Test
+
+1. Save, refresh, `F12` → **Console**. Click the little ▶ arrow next to the
+   object to open it. Find the temperature.
+2. **Your job:** change `console.log(data)` so it logs **only the number**.
+   Hint: it's an object inside an object, like `faqs[0].question` but with
+   two dots: `data.something.something`.
+3. Bonus: `F12` → **Network** tab, refresh, and click the `forecast?...` row.
+   That's the request your code sent. Look at the **Response** tab.
+
+Then tell Claude the temperature you got (no commit yet; part 2 puts it on the page).
+
+Result: `data.current.temperature_2m` → `11.2` ✅ The name must match the JSON
+**exactly** (`temperature_2m`, not `temperature`), or you get `undefined`.
+
+### Part 2: show it on the page, with a loading state
+
+**Why a loading state?** The API takes a moment to answer. Without a message,
+the visitor sees an empty gap and might think the page is broken. Real apps
+always show "Loading…" first, then replace it with the data.
+
+**New concept: template literal**, a string with a value inside it:
+
+```js
+const temp = 11.2;
+`Edmonton right now: ${temp}°C`   // → "Edmonton right now: 11.2°C"
+```
+
+- Uses **backticks** `` ` `` (key under `Esc`), not quotes.
+- `${ }` means "put this value here."
+
+**Step 1 (HTML).** In `index.html`, in the Contact section, under
+"Serving Edmonton and surrounding areas.", add:
+
+```html
+<p id="weather">Loading weather…</p>
+```
+
+That text **is** the loading state: it shows until the data arrives.
+
+**Step 2 (JS).** In `getWeather`, replace the `console.log(...)` line with:
+
+```js
+  const temperature = data.current.temperature_2m;
+  const weatherElement = document.querySelector("#weather");
+  weatherElement.textContent = `Edmonton right now: ${temperature}°C`;
+```
+
+1. Save the number in a well-named variable.
+2. Find the `<p id="weather">` on the page.
+3. Replace "Loading weather…" with the real temperature.
+
+**Test**
+
+1. Save **both** files, refresh. Do you see the temperature in Contact?
+2. **See the loading state:** F12 → **Network** tab → change "No throttling" to
+   **"Slow 4G"** (or "3G"), refresh. You'll see "Loading weather…" first.
+   Set it back to **No throttling** after!
+3. Add, commit, push, `git status`.
+
+---
+
+## Done: FAQ accordion ✅
+
+## Previous task: FAQ accordion (functions)
 
 ### Why
 
