@@ -1,0 +1,25 @@
+{
+  "name": "henna-landing-page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+     "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoosaZDigital/henna-landing-page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MoosaZDigital/henna-landing-page/issues"
+  },
+  "homepage": "https://github.com/MoosaZDigital/henna-landing-page#readme",
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}

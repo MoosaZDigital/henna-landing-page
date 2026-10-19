@@ -1,6 +1,98 @@
 # Lesson Notes
 
-## Current task: when the API fails (reading and handling errors)
+## Current task: Node, npm and localhost (Gate 3)
+
+### Why
+
+Almost every real project (React, Tailwind, your internship's code) runs
+**locally** with Node and npm before it goes live. You'll install a tool,
+start a **dev server**, and open your site at `localhost`.
+
+### New words
+
+| Word | Meaning |
+|---|---|
+| **Node.js** | Runs JavaScript **outside** the browser (in the terminal) |
+| **npm** | Node's "app store" for code tools (**packages**). Comes with Node. |
+| **`package.json`** | Your project's ID card: name, scripts, and which packages it uses |
+| **`node_modules/`** | Folder where npm puts downloaded packages. Huge. **Never commit it.** |
+| **`package-lock.json`** | Exact versions installed. **Do commit it.** |
+| **Dev server** | A small program that serves your site to your browser while you work |
+| **localhost** | "This computer." `http://localhost:5173` = a site served by your own machine |
+
+### Part 1: Node in the terminal
+
+In your **other** terminal (in the `henna-landing-page` folder):
+
+```
+node -v
+```
+
+Shows Node's version. Then try JavaScript **without a browser**:
+
+```
+node -e "console.log(2 + 2)"
+```
+
+### Part 2: create `package.json`
+
+```
+npm init -y
+```
+
+`-y` = "yes to all the default questions." Open the new `package.json` and look:
+it's JSON, like the weather data!
+
+### Part 3: install a dev server (Vite)
+
+```
+npm install --save-dev vite
+```
+
+- Downloads **Vite** (a dev server, and the same tool you'll use for React).
+- `--save-dev` = "a tool for developing, not part of the site itself."
+- Look: new `node_modules/` folder, new `package-lock.json`, and `vite` listed
+  under `devDependencies` in `package.json`.
+
+### Part 4: add a script and start the server
+
+In `package.json`, find `"scripts"` and add a `"dev"` line:
+
+```json
+"scripts": {
+  "dev": "vite",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
+
+(Watch the comma after `"vite"`: JSON items are separated by commas.)
+
+Then in the terminal:
+
+```
+npm run dev
+```
+
+1. Ctrl + click the `http://localhost:5173` link. Your site opens!
+2. Change some text in `index.html`, save. The page updates **by itself**.
+3. **Two places for errors:**
+   - **Terminal** = problems with the **server** (e.g. it can't start)
+   - **Browser Console** = problems with your **page's JavaScript**
+4. Stop the server: click the terminal, press **Ctrl + C**.
+
+### Part 5: keep `node_modules` out of Git
+
+1. Open `.gitignore`. Put `node_modules/` on its **own new line**
+   (your file has no line break after `linkedin-posts.md` yet).
+2. `git status`: `node_modules` should **not** appear. `package.json` and
+   `package-lock.json` should.
+3. Add, commit, push.
+
+---
+
+## Done: handling API errors ✅ (Gate 2 complete!)
+
+## Previous task: when the API fails (reading and handling errors)
 
 ### Why
 
@@ -1689,6 +1781,14 @@ Then tell Claude it's done.
 | `classList.contains` | Checks if an element has a class: `true` or `false` |
 | `if` statement | Runs code only when a condition is `true` |
 | Undo / redo | `Ctrl + Z` undoes, `Ctrl + Y` brings it back |
+| API | A website for code: ask with a URL, get data back |
+| JSON | The data format APIs answer with; looks like JS objects |
+| `fetch` / `await` / `async` | Send a request / wait for the answer / needed on a function that uses `await` |
+| Loading state | A message shown while waiting for data, e.g. "Loading weather…" |
+| Template literal | `` `Hi ${name}` `` puts a value inside text (backticks!) |
+| `try...catch` | Try risky code; if it fails, run `catch` instead of crashing |
+| Reading an error | **Type** (`TypeError`) + **message** (`Failed to fetch`) + **location** (`script.js:57`) |
+| Scope | Variables made inside `{ }` only exist inside those `{ }` |
 
 ## Why build the FAQ from an array?
 
