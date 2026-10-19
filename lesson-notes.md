@@ -1,6 +1,95 @@
 # Lesson Notes
 
-## Current task: get live data from an API (`fetch`), part 1
+## Current task: when the API fails (reading and handling errors)
+
+### Why
+
+Your code assumes the API always answers. But the internet drops, servers go
+down, URLs get typos. Right now, if that happens, the page says
+"Loading weather…" **forever**, and the visitor never knows why.
+Good code **plans for failure**. This finishes **Gate 2**.
+
+### Part 1: break it on purpose and read the error
+
+1. In `getWeather`, add an extra **o** to the URL: `api.open-meteoo.com`.
+2. Save, refresh. What does the Contact section say?
+3. F12 → **Console**. Read the red error. Find 3 things:
+   - **The error type** (the first word, e.g. `TypeError`)
+   - **The message** (what went wrong, in words)
+   - **The file and line** (blue link on the right, e.g. `script.js:58`).
+     Click it: DevTools jumps to the exact line.
+4. Tell Claude what you found. **Leave the typo in** for Part 2.
+
+### How to read any error
+
+| Part | Example | Question it answers |
+|---|---|---|
+| Type | `TypeError` | What kind of problem? |
+| Message | `Failed to fetch` | What went wrong? |
+| Location | `script.js:58` | Where? Start looking here. |
+
+Tip: copy the message (not your whole code) into a search engine. Someone
+has almost always had it before.
+
+Result: `TypeError: Failed to fetch` at `script.js:57` (the `fetch` line), plus
+`ERR_NAME_NOT_RESOLVED` = "this website name doesn't exist." **Uncaught** = no
+code handled it, so the function **stopped** there and the page stayed on
+"Loading weather…" forever.
+
+### Part 2: `try...catch`
+
+```js
+try {
+  // code that might fail
+} catch (error) {
+  // runs ONLY if something above failed
+}
+```
+
+In plain words: "**Try** these steps. If any of them fails, stop and **catch**
+the error here instead of crashing."
+
+**Your new `getWeather`:**
+
+```js
+async function getWeather() {
+  const weatherElement = document.querySelector("#weather");
+
+  try {
+    const response = await fetch("...same URL...");
+    const data = await response.json();
+    const temperature = data.current.temperature_2m;
+    weatherElement.textContent = `Edmonton right now: ${temperature}°C`;
+  } catch (error) {
+    console.error("Weather failed:", error);
+    weatherElement.textContent = "Weather unavailable right now.";
+  }
+}
+```
+
+What changed:
+
+1. `weatherElement` moved to the **top**, outside `try`, because **both** parts
+   need it. (Variables made inside `{ }` only exist inside those `{ }`. That's **scope**.)
+2. The risky steps (fetch, read JSON, use data) are inside `try { }`.
+3. `catch (error)` gets the error. Two jobs:
+   - `console.error(...)`: keep the details **for the developer** (red in the Console).
+   - A friendly message **for the visitor**.
+
+**Test**
+
+1. With the typo still in: refresh. You should see "Weather unavailable right now."
+2. Console: the error is still logged, but no longer says **Uncaught**.
+3. **Fix the typo** (`open-meteo`), refresh. The temperature is back.
+4. Add, commit, push, `git status`.
+
+---
+
+## Done: live data from an API ✅
+
+Live Edmonton temperature with a "Loading weather…" state. Gate 2 proof task done.
+
+## Previous task: get live data from an API (`fetch`), part 1
 
 ### Why
 
