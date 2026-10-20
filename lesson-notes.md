@@ -1,6 +1,106 @@
 # Lesson Notes
 
-## Current task: Node, npm and localhost (Gate 3)
+## Current task: README on a branch + your first pull request (Gate 4)
+
+### Why
+
+At your internship, you'll almost **never** commit straight to `main`.
+You'll make a **branch**, do your work there, open a **pull request (PR)**,
+and someone reviews it before it's **merged** into `main`.
+We'll practise that by writing your project's **README**.
+
+### New words
+
+| Word | Meaning |
+|---|---|
+| **Branch** | A separate copy of your project's history to work on safely. `main` stays untouched. |
+| **Pull request (PR)** | On GitHub: "Please review my branch and add it to `main`." |
+| **Merge** | Adding a branch's commits into `main` |
+| **README.md** | The first file people see on your GitHub repo: what it is, how to run it |
+| **Markdown (`.md`)** | Simple formatting: `#` heading, `-` bullet, `**bold**`, `[text](link)` |
+
+### Step 1: create a branch
+
+```
+git switch -c add-readme
+```
+
+- `switch` = move to a branch. `-c` = **create** it first.
+- Check: `git branch` lists your branches; `*` marks the one you're on.
+
+### Step 2: write `README.md`
+
+Create a new file `README.md` in the project folder (next to `index.html`).
+Write it **yourself**, with these headings:
+
+```markdown
+# Henna Studio: landing page
+
+One or two sentences: what it is and who it's for. Say it's a learning
+project with sample content.
+
+**Live site:** (your GitHub Pages link)
+
+## Features
+
+- (one bullet per feature: services, gallery, FAQ accordion, live weather, ...)
+
+## Built with
+
+- HTML, CSS, JavaScript
+- Open-Meteo weather API
+- Vite (local dev server)
+
+## Run it locally
+
+(the commands someone needs after cloning: `npm install`, then `npm run dev`)
+
+## What I learned
+
+- (3 to 5 bullets in your own words)
+```
+
+Preview it: `Ctrl + Shift + V`.
+
+### Step 3: commit and push the branch
+
+```
+git add .
+git commit -m "Add README"
+git push -u origin add-readme
+```
+
+`-u origin add-readme` = "create this branch on GitHub too, and link them."
+Only needed the **first** push of a new branch.
+
+### Step 4: open the pull request on GitHub
+
+1. Open your repo on GitHub. Click the yellow **Compare & pull request** button.
+2. Title: `Add README`. Description: 1–2 lines on what and why.
+3. Click **Create pull request**.
+4. Click the **Files changed** tab. This is what a reviewer reads.
+5. Click **Merge pull request** → **Confirm merge** → **Delete branch**.
+
+### Step 5: bring `main` up to date locally
+
+```
+git switch main
+git pull
+git branch -d add-readme
+```
+
+- `git pull` downloads the merge from GitHub (the opposite of `push`).
+- `git branch -d` deletes the local branch (it's merged, so nothing is lost).
+- Check: the README is now on `main`.
+
+---
+
+## Done: Node, npm and localhost ✅
+
+`npm init -y`, `npm install --save-dev vite`, `"dev": "vite"`, `npm run dev`
+→ site on `http://localhost:5173` with hot reload. `node_modules/` in `.gitignore`.
+
+## Previous task: Node, npm and localhost (Gate 3)
 
 ### Why
 
@@ -1789,6 +1889,12 @@ Then tell Claude it's done.
 | `try...catch` | Try risky code; if it fails, run `catch` instead of crashing |
 | Reading an error | **Type** (`TypeError`) + **message** (`Failed to fetch`) + **location** (`script.js:57`) |
 | Scope | Variables made inside `{ }` only exist inside those `{ }` |
+| Node.js / npm | Run JavaScript in the terminal / install code tools (packages) |
+| `package.json` | Project ID card: name, scripts, packages. Commit it. |
+| `node_modules/` | Downloaded packages. Huge. **Never commit**: it's in `.gitignore`. |
+| `npm run dev` | Runs the `dev` script → starts the Vite dev server |
+| localhost | "This computer." Only you can see it. Ctrl + C stops the server. |
+| Terminal vs Console errors | Terminal = server problems; browser Console = page JavaScript problems |
 
 ## Why build the FAQ from an array?
 
