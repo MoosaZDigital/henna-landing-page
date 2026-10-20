@@ -1,6 +1,85 @@
 # Lesson Notes
 
-## Current task: README on a branch + your first pull request (Gate 4)
+## Current task: break it and recover it with Git (Gate 4 proof task)
+
+### Why
+
+Everyone breaks code. Professionals aren't scared of it, because Git can
+bring almost anything back **if it was committed**. You'll break your project
+3 ways, on purpose, and recover each time.
+
+We'll do it all on a **practice branch**, so `main` is never at risk.
+
+### Step 0: clean start
+
+1. `git status` should say "working tree clean". If not, commit first.
+2. `git switch -c practice-recovery`
+
+### Break 1: you mess up a file (not saved in a commit yet)
+
+1. In `script.js`, delete the **whole** `getWeather` function. Save.
+2. Refresh the site: the weather is stuck on "Loading weather…".
+3. See the damage: `git diff` (red `-` lines = removed). Press **q** to exit.
+4. **Recover:** `git restore script.js`
+5. Check: the function is back in VS Code, `git status` is clean.
+
+`git restore` = "put this file back the way it was in the last commit."
+⚠️ It **throws away** your unsaved-in-Git changes to that file. Only use it
+when you really want them gone.
+
+### Break 2: you delete a whole file
+
+1. In the VS Code file list, right-click `style.css` → **Delete**.
+2. Refresh: the site has **no styling**.
+3. `git status` shows `deleted: style.css`.
+4. **Recover:** `git restore style.css`
+5. The file is back and so is the styling.
+
+### Break 3: you commit a bad change
+
+1. In `index.html`, delete the whole **FAQ** `<section>`. Save.
+2. **Commit it:** `git add .` then `git commit -m "Oops: remove FAQ"`.
+3. `git restore` can't help now: the bad change **is** the last commit.
+4. **Recover:** `git revert HEAD`
+   - `HEAD` = "the latest commit."
+   - `revert` makes a **new** commit that does the exact opposite.
+   - An editor may open for the message. If it's Vim (`~` symbols):
+     type `:wq` and Enter. If it's VS Code: close the tab.
+5. `git log --oneline -3`: you'll see "Oops" **and** "Revert Oops".
+   The FAQ is back.
+
+**Why revert, not delete the commit?** `revert` never rewrites history, so
+it's safe even after pushing (remember: never `--amend` a pushed commit).
+
+### Step 4: throw the whole practice branch away
+
+```
+git switch main
+git branch -D practice-recovery
+```
+
+Capital `-D` = "delete it even though it was never merged." `main` was never
+touched. That's the power of branches: **a safe place to experiment.**
+
+### Recovery cheat sheet
+
+| Situation | Command |
+|---|---|
+| Messed up a file, not committed | `git restore file` |
+| Deleted a file, not committed | `git restore file` |
+| Committed something bad (even if pushed) | `git revert HEAD` |
+| Experiment went wrong on a branch | `git switch main` + `git branch -D name` |
+| Typo in last commit message, **not pushed** | `git commit --amend -m "..."` |
+
+---
+
+## Done: README + first pull request ✅
+
+Branch `add-readme` → commit → `git push -u origin add-readme` → PR #1 →
+merge → `git switch main` + `git pull` + `git branch -d add-readme` +
+`git fetch --prune`. Lesson: **one topic per PR**.
+
+## Previous task: README on a branch + your first pull request (Gate 4)
 
 ### Why
 
@@ -1895,6 +1974,10 @@ Then tell Claude it's done.
 | `npm run dev` | Runs the `dev` script → starts the Vite dev server |
 | localhost | "This computer." Only you can see it. Ctrl + C stops the server. |
 | Terminal vs Console errors | Terminal = server problems; browser Console = page JavaScript problems |
+| Branch | `git switch -c name` creates one; work there, `main` stays safe |
+| Pull request | On GitHub: "review my branch and merge it into `main`" |
+| `git pull` | Download new commits from GitHub (opposite of `push`) |
+| `git fetch --prune` | Forget branches deleted on GitHub |
 
 ## Why build the FAQ from an array?
 
