@@ -1,5 +1,89 @@
 # Lesson Notes
 
+## Done: cloned and ran MDN's todo-react ✅ (Gate 3 proof task)
+
+What I found:
+
+- `"dev": "vite --port 3000 --open"`: runs on port **3000** (not 5173) and opens
+  the browser by itself. **Always check `package.json` and the terminal output.**
+- Dependencies: `react` (the framework), `react-dom` (connects React to the
+  page), `nanoid` (makes unique IDs). Listed alphabetically, not by importance.
+- No `node_modules` in the clone: it's in their `.gitignore`, like mine.
+  `npm install` rebuilds it from `package.json` (the shopping list).
+- A new terminal is empty: the server output is in the terminal that ran
+  `npm run dev`. Find it in the terminal list on the right.
+
+First look at React (`src/App.jsx`):
+
+- **JSX** = HTML written inside JavaScript (`<h1>TodoMatic</h1>`)
+- `className` instead of `class` (`class` is a JavaScript word)
+- camelCase attributes: `tabIndex`, `onClick`
+- Capitalised tags (`<Form />`, `<Todo />`) = **components**, reusable pieces,
+  each in its own file in `src/components/`
+
+## Previous task: clone someone else's repo and run it (Gate 3 proof task)
+
+### Why
+
+On day 1 of your internship you'll get a link to a repo and be asked to run
+it. This is that skill. We'll use **MDN's React to-do app**
+(github.com/mdn/todo-react): a trusted source, and a first look at React.
+
+### Step 1: go to your Projects folder (NOT inside henna)
+
+```
+cd C:\Users\consi\Projects
+```
+
+⚠️ Never clone a repo **inside** another repo. Check that your prompt ends
+in `Projects>`, not `henna-landing-page>`.
+
+### Step 2: clone it
+
+```
+git clone https://github.com/mdn/todo-react.git
+cd todo-react
+```
+
+`git clone` = download the whole project **and** its Git history.
+
+### Step 3: read before you run
+
+Open the folder in VS Code: `code .` (opens a **new window**)
+
+1. Read `README.md`. How do they say to run it?
+2. Open `package.json`. Find `"scripts"` → what does `"dev"` run?
+   Find `"dependencies"`: which packages does it need?
+3. Is there a `node_modules` folder? (No! Why not?)
+
+### Step 4: install and run
+
+In the **new window's** terminal:
+
+```
+npm install
+npm run dev
+```
+
+1. `npm install` reads `package.json` and creates `node_modules`.
+   Yellow `warn` / "vulnerabilities" messages are common in older
+   projects. Only red `ERR!` stops you.
+2. `npm run dev` should open the app in your browser **by itself**.
+   (Look at the `"dev"` script: what does `--open` do? What port?)
+3. Use the app: add a task, tick it, delete it.
+4. Stop the server: **Ctrl + C**.
+
+### Step 5: look around (first peek at React)
+
+Open `src/App.jsx` and `src/components/`. Don't try to understand it all.
+Just find:
+
+- HTML-looking code **inside** JavaScript (that's **JSX**)
+- `className=` instead of `class=`
+- A file name that matches something you see on the screen
+
+---
+
 ## Done: break it and recover it with Git ✅ (Gate 4 complete!)
 
 What happened:
@@ -2000,6 +2084,10 @@ Then tell Claude it's done.
 | `git revert HEAD` | New commit that undoes the last one. Safe after pushing. |
 | `git branch -D name` | Delete a branch even if it was never merged |
 | `ReferenceError` | You used a name (variable/function) that doesn't exist |
+| `git clone url` | Download a whole project and its history. Never inside another repo! |
+| `--option` | Changes how a command behaves, e.g. `--port 3000`, `--open` |
+| JSX | HTML inside JavaScript (React). Uses `className`, camelCase attributes |
+| Component | A reusable React building block, written as a capitalised tag: `<Todo />` |
 
 ## Why build the FAQ from an array?
 
