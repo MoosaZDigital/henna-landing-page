@@ -1,6 +1,23 @@
 # Lesson Notes
 
-## Current task: break it and recover it with Git (Gate 4 proof task)
+## Done: break it and recover it with Git ✅ (Gate 4 complete!)
+
+What happened:
+
+- **Break 1:** deleted `getWeather` → stuck on "Loading weather…" +
+  `ReferenceError: getWeather is not defined` (calling a name that doesn't
+  exist) → `git restore script.js` brought back 15 lines.
+- **Break 2:** deleted `style.css` → no styling → `git restore style.css`.
+- **Break 3:** deleted the FAQ section and **committed** it. The weather broke
+  too: the JS couldn't find `#faq-list` and crashed before `getWeather()`.
+  **Deleting HTML can break JavaScript.** → `git revert HEAD` made a new
+  "Revert" commit. The mistake stays in history, with the undo on top.
+- **Cleanup:** `git branch -D practice-recovery`. My first try, `git branch -D`
+  with no name, gave `fatal: branch name required`. `main` was never touched.
+
+Tip: type the start of a name and press **Tab** to auto-complete it.
+
+## Previous task: break it and recover it with Git (Gate 4 proof task)
 
 ### Why
 
@@ -1978,6 +1995,11 @@ Then tell Claude it's done.
 | Pull request | On GitHub: "review my branch and merge it into `main`" |
 | `git pull` | Download new commits from GitHub (opposite of `push`) |
 | `git fetch --prune` | Forget branches deleted on GitHub |
+| `git diff` | Show uncommitted changes (`-` removed, `+` added). **q** to exit. |
+| `git restore file` | Put a file back to the last commit (throws away changes!) |
+| `git revert HEAD` | New commit that undoes the last one. Safe after pushing. |
+| `git branch -D name` | Delete a branch even if it was never merged |
+| `ReferenceError` | You used a name (variable/function) that doesn't exist |
 
 ## Why build the FAQ from an array?
 
