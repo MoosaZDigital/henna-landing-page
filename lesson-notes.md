@@ -1,5 +1,108 @@
 # Lesson Notes
 
+## Current task: `.env` and keeping secrets safe (last Gate 3 item)
+
+### Why
+
+In week 4 you'll use an AI API, and that needs a **secret key** (like a
+password that costs money if someone steals it). Bots scan GitHub for leaked
+keys **within minutes**. So keys must **never** be in your code or on GitHub.
+
+### New words
+
+| Word | Meaning |
+|---|---|
+| **Environment variable** | A setting that lives **outside** your code, e.g. `API_KEY` |
+| **`.env` file** | A private file holding them: `NAME=value`, one per line. **Never committed.** |
+| **`.env.example`** | A **public** copy with fake values, so others know which settings they need |
+| **`process.env`** | How **Node** code (server side) reads environment variables |
+
+### Step 1: protect it BEFORE you create it
+
+Add `.env` to `.gitignore` on its own line:
+
+```
+linkedin-posts.md
+node_modules/
+.env
+```
+
+Save. (Order matters: ignore first, then create. Then it can never slip into a commit.)
+
+### Step 2: create `.env`
+
+New file in the project folder, named exactly `.env` (starts with a dot, no
+other name). Put in a **pretend** key:
+
+```
+API_KEY=pretend-key-12345
+```
+
+No spaces around `=`. No quotes needed.
+
+Check: `git status` → `.env` must **not** appear. ✅
+
+### Step 3: create `.env.example` (this one IS committed)
+
+```
+API_KEY=your-key-here
+```
+
+### Step 4: read the secret with Node
+
+New file `env-demo.js`:
+
+```js
+const key = process.env.API_KEY;
+console.log("Key loaded:", key ? "yes" : "no");
+console.log("First 4 characters:", key.slice(0, 4));
+```
+
+Run it:
+
+```
+node --env-file=.env env-demo.js
+```
+
+- `--env-file=.env` = "load the settings from `.env` first."
+- We only print the first 4 characters. Even in logs, don't print whole keys.
+- Now run `node env-demo.js` (without `--env-file`). What happens? Why?
+
+### The big rule: front-end code can't keep secrets
+
+Everything in `script.js` goes to the visitor's browser. Anyone can read it
+(View Page Source, Network tab). Even a `.env` value, if the **front-end** uses
+it, ends up in the public JavaScript.
+
+So:
+
+| Where code runs | Can it hold a secret key? |
+|---|---|
+| Browser (`script.js`, React) | ❌ Never |
+| Server / serverless function (Node, `process.env`) | ✅ Yes |
+
+`env-demo.js` runs in Node, on **your** computer, so it's safe. In week 4, a
+**serverless function** will work exactly like it: read the key from
+`process.env`, call the AI, send back only the answer.
+
+### If a key ever leaks
+
+Deleting it from the code is **not** enough: Git history keeps it. Go to the
+provider's dashboard, **revoke** the key and **create a new one**. Then put
+the new one in `.env` only.
+
+### Step 5: commit
+
+```
+git add .
+git status
+```
+
+Check the list: `.gitignore`, `.env.example`, `env-demo.js` ✅. **No `.env`.**
+Then commit and push.
+
+---
+
 ## Done: cloned and ran MDN's todo-react ✅ (Gate 3 proof task)
 
 What I found:
