@@ -1,6 +1,17 @@
 # Lesson Notes
 
-## Current task: `.env` and keeping secrets safe (last Gate 3 item)
+## Done: `.env` and keeping secrets safe ✅ (Gate 3 complete)
+
+What I found:
+
+- `.env` shows in the sidebar (it's a real file) but not in `git status`
+  (it's listed in `.gitignore`). VS Code shows ignored files in grey.
+- `node --env-file=.env env-demo.js` → `Key loaded: yes`, `pret`.
+- `node env-demo.js` (no `.env` loaded) → `TypeError: Cannot read properties
+  of undefined (reading 'slice')` at `env-demo.js:3:40`. The key isn't in the
+  code; it's loaded from outside at start-up. No file, no key.
+- Code runs top to bottom: line 2 printed `Key loaded: no` before line 3 crashed.
+- Checked GitHub after pushing: `.env.example` is there, `.env` is not.
 
 ### Why
 
@@ -2191,6 +2202,11 @@ Then tell Claude it's done.
 | `--option` | Changes how a command behaves, e.g. `--port 3000`, `--open` |
 | JSX | HTML inside JavaScript (React). Uses `className`, camelCase attributes |
 | Component | A reusable React building block, written as a capitalised tag: `<Todo />` |
+| `.env` | Private file of secret settings (`NAME=value`). In `.gitignore`, **never committed** |
+| `.env.example` | Public copy with **fake** values, so others know which settings they need |
+| `process.env` | How Node (server side) reads environment variables, e.g. `process.env.API_KEY` |
+| `--env-file=.env` | Tells Node to load `.env` before running the script |
+| Secret key rule | Browser code can't keep secrets. Leaked key → **revoke + make a new one** |
 
 ## Why build the FAQ from an array?
 
