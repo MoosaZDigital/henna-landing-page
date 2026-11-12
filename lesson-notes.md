@@ -2207,6 +2207,14 @@ Then tell Claude it's done.
 | `process.env` | How Node (server side) reads environment variables, e.g. `process.env.API_KEY` |
 | `--env-file=.env` | Tells Node to load `.env` before running the script |
 | Secret key rule | Browser code can't keep secrets. Leaked key → **revoke + make a new one** |
+| `addEventListener("submit", ...)` | Pay attention to what happens when they hit submit, and run my instructions when it does |
+| `event.preventDefault()` | Don't do your normal thing (stops the page reload) |
+| `FormData` vs `formData` | `FormData` is the machine, `formData` is the box. Capitals matter! |
+| `Object.fromEntries(formData)` | Opens the envelope and organizes the entries into an object `{ }` |
+| Initialization | Putting something in the box (variable) for the first time |
+| `TypeError: ... is not iterable` | I gave a tool the wrong kind of thing (the machine instead of the box) |
+| Browser vs server | Browser is on everyone's computer and makes requests. Server is one computer receiving and answering them, usually 24/7, and it stores things |
+| Console vs database | Console = sticky note in the visitor's browser, gone on refresh. Database = filing cabinet on a server the owner can see |
 
 ## Why build the FAQ from an array?
 
