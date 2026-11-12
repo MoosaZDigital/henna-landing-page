@@ -71,3 +71,12 @@ async function getWeather() {
 }
 
 getWeather();
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const formData = new FormData(form);
+  const booking = Object.fromEntries(formData);
+  console.log(booking);
+});
