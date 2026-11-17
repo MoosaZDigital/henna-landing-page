@@ -2215,6 +2215,12 @@ Then tell Claude it's done.
 | `TypeError: ... is not iterable` | I gave a tool the wrong kind of thing (the machine instead of the box) |
 | Browser vs server | Browser is on everyone's computer and makes requests. Server is one computer receiving and answering them, usually 24/7, and it stores things |
 | Console vs database | Console = sticky note in the visitor's browser, gone on refresh. Database = filing cabinet on a server the owner can see |
+| GET vs POST | GET asks for data, POST sends data |
+| `JSON.stringify(object)` | Packs an object into JSON text (`response.json()` unpacks it) |
+| Status `201` | Created: the row was added |
+| `https` vs `http` | The **s** = secure (🔒). Supabase only accepts `https` |
+| Publishable key vs secret key | Publishable = mail-slot key, OK in browser code (RLS protects the data). Secret = master key, **never** in code |
+| RLS + policy | RLS locks the table. A policy opens one door, e.g. "visitors can **insert** only" |
 
 ## Why build the FAQ from an array?
 
