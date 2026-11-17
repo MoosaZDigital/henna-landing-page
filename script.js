@@ -78,11 +78,15 @@ const SUPABASE_KEY = "sb_publishable_HOM081Q6Q4OOuFtWfwavKw_oiK8zBIZ";
 
 const form = document.querySelector("form");
 
+const formStatus = document.querySelector("#form-status");
+
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
   const formData = new FormData(form);
   const booking = Object.fromEntries(formData);
-  console.log(booking);
+
+  formStatus.textContent = "Sending...";
+
   const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
     method: "POST",
     headers: {
@@ -93,4 +97,7 @@ form.addEventListener("submit", async function (event) {
   });
 
   console.log(response.status);
+  formStatus.textContent = "Thanks! We got your request.";
+
+  form.reset();
 });
