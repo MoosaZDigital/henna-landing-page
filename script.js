@@ -72,11 +72,25 @@ async function getWeather() {
 
 getWeather();
 
+const SUPABASE_URL = "https://vfuujptbaswummlumbay.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_HOM081Q6Q4OOuFtWfwavKw_oiK8zBIZ";
+
 const form = document.querySelector("form");
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
   event.preventDefault();
   const formData = new FormData(form);
   const booking = Object.fromEntries(formData);
   console.log(booking);
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_KEY,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(booking),
+  });
+
+  console.log(response.status);
 });
