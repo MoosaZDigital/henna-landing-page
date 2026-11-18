@@ -86,18 +86,27 @@ form.addEventListener("submit", async function (event) {
   const booking = Object.fromEntries(formData);
 
   formStatus.textContent = "Sending...";
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_KEY,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    });
 
-  const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
-    method: "POST",
-    headers: {
-      apikey: SUPABASE_KEY,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(booking),
-  });
+    if (!response.ok) {
+      throw new Error(`Supabase said ${response.status}`);
+    }
 
-  console.log(response.status);
-  formStatus.textContent = "Thanks! We got your request.";
+    console.log(response.status);
+    formStatus.textContent = "Thanks! We got your request.";
 
-  form.reset();
+    form.reset();
+  } catch (error) {
+    console.error("Booking failed:", error);
+    formStatus.textContent =
+      "Sorry, something went wrong. Please try again or email hello@example.com.";
+  }
 });
