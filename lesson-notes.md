@@ -2221,6 +2221,13 @@ Then tell Claude it's done.
 | `https` vs `http` | The **s** = secure (🔒). Supabase only accepts `https` |
 | Publishable key vs secret key | Publishable = mail-slot key, OK in browser code (RLS protects the data). Secret = master key, **never** in code |
 | RLS + policy | RLS locks the table. A policy opens one door, e.g. "visitors can **insert** only" |
+| `response.ok` | Tells us the response from the API is OK (any status 200–299, usually `201` for us) |
+| `if (!response.ok)` | Checks if the request was successful, and if not, runs the code in the curly brackets. Catches "the office refused the package" (e.g. `404`), because `fetch` does **not** throw for that |
+| `throw new Error(...)` | Raise the alarm myself → jump straight to `catch` |
+| `try...catch` | Try attempts something that might fail. Catch catches the error if any, handles it and displays a message. Catches "the truck can't leave the yard" (no internet) **and** my own `throw` |
+| `form.reset()` | Empties all the form boxes. Only after success, so a visitor doesn't lose their text on an error |
+| `SyntaxError` | Typo in the grammar (quotes, brackets). JavaScript can't read the file → **whole page dead** |
+| `TypeError` | Used the wrong kind of thing, e.g. the machine instead of the box, or `Failed to fetch` (no internet) |
 
 ## Why build the FAQ from an array?
 
@@ -2233,3 +2240,7 @@ Then tell Claude it's done.
 - Change didn't show up? **Check for the unsaved ● dot** on the file tab, then refresh.
 - CSS not working? Check that the `href` file name **exactly** matches the real file name.
 - `Shift + Alt + F` formats (re-indents) your code.
+- **Whole page stops working at once?** Look for a red `SyntaxError` in the Console first. One typo stops the entire file.
+- Page running old code? **Hard refresh**: `Ctrl + Shift + R`.
+- Request not working? Check the **Network** tab → click the request → **Status** and **Response**.
+- A string in `" "` must stay on **one line**.
