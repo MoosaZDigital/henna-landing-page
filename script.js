@@ -110,3 +110,10 @@ form.addEventListener("submit", async function (event) {
       "Sorry, something went wrong. Please try again or email hello@example.com.";
   }
 });
+
+async function sayHello() {
+  const response = await fetch(`${SUPABASE_URL}/functions/v1/hello`);
+  const data = await response.json();
+  console.log(data);
+}
+sayHello();
