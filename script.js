@@ -111,9 +111,15 @@ form.addEventListener("submit", async function (event) {
   }
 });
 
-async function sayHello() {
-  const response = await fetch(`${SUPABASE_URL}/functions/v1/hello`);
+async function askQuestion(question) {
+  const response = await fetch(`${SUPABASE_URL}/functions/v1/hello`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ question: question}),
+  });
   const data = await response.json();
   console.log(data);
 }
-sayHello();
+
